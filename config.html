@@ -9,8 +9,24 @@
 
 	<body>
 		<div style="padding: 10px;">
+			<label for="providerList">Provider:</label><br />
+			<select id="providerList" style="width: 100%; margin-top: 5px;">
+				<option value="anthropic">anthropic</option>
+				<option value="deepseek">deepseek</option>
+				<option value="google">google</option>
+				<option value="groq">groq</option>
+				<option value="lms">lms</option>
+				<option value="mistral">mistral</option>
+				<option value="ollama">ollama</option>
+				<option value="openai">openai</option>
+				<option value="xai">xai</option>
+			</select>
+			<br /><br />
 			<label for="apiKey">API Key:</label><br />
 			<input type="text" id="apiKey" style="width: 100%; margin-top: 5px;" />
+			<br /><br />
+			<label for="modelName">Model Name:</label><br />
+			<input type="text" id="modelName" style="width: 100%; margin-top: 5px;" />
 			<br /><br />
 			<button id="save">Save</button>
 		</div>
