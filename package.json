@@ -1,0 +1,21 @@
+{
+  "name": "stop-fraud-thunderbird",
+  "version": "1.0.0",
+  "description": "Stop fraudulent email in Thunderbird",
+  "author": "AG",
+  "license": "UNLICENSED",
+  "private": true,
+  "scripts": {
+    "lint": "web-ext lint",
+    "build": "web-ext build --overwrite-dest",
+    "start": "web-ext run --target=thunderbird",
+    "format": "prettier --write \"**/*.{js,html,json,md}\""
+  },
+  "devDependencies": {
+    "prettier": "^3.3.3",
+    "web-ext": "^8.3.0"
+  },
+  "dependencies": {
+    "@themaximalist/llm.js": "^1.0.3"
+  }
+}
