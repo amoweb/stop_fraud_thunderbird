@@ -1,0 +1,3 @@
+[submodule "lib/aimailsupport"]
+	path = lib/aimailsupport
+	url = https://github.com/YellowSakura/aimailsupport.git
