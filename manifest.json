@@ -10,18 +10,19 @@
     }
   },
   "action": {
-    "default_title": "await popup"
+    "default_title": "Stop fraud",
+    "type": "menu"
   },
   "background": {
     "scripts": [
       "background.js"
     ]
   },
-  "permissions": [ "messagesRead" ],
+  "permissions": [ "messagesRead", "menus", "storage" ],
 
   "message_display_action": {
     "default_icon": "icon.png",
-    "default_title": "Afficher la popup",
-    "default_popup": "popup.html"
+    "default_title": "Stop fraud",
+    "type": "menu"
   }
 }

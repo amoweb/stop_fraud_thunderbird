@@ -9,8 +9,10 @@
 
 	<body>
 		<div style="height: 200px; width: 50%; background-color: red;">
-			<input id="button_ok" type="button" data="ok" value="OK">
-			<input id="button_cancel" type="button" data="cancel" value="CANCEL">
+			<ul id="menu" style="list-style: none; margin: 0; padding: 0;">
+				<li id="menu_analyse" data="analyse" style="padding: 5px; cursor: pointer;">Analyse</li>
+				<li id="menu_config" data="config" style="padding: 5px; cursor: pointer;">Config</li>
+			</ul>
 			<br />
 			Message ID = <div id="messageId"></div>.
 		</div>

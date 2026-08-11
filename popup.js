@@ -58,8 +58,8 @@ async function chargerIdMessage() {
 
 // Exécution au chargement de la popup
 async function onLoad() {
-    document.getElementById("button_ok").addEventListener("click", notifyMode);
-    document.getElementById("button_cancel").addEventListener("click", notifyMode);
+    document.getElementById("menu_analyse").addEventListener("click", notifyMode);
+    document.getElementById("menu_config").addEventListener("click", notifyMode);
     
     // Charger l'ID de message une fois que le HTML est complètement affiché
     await chargerIdMessage();

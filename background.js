@@ -1,22 +1,23 @@
-// Thunderbird can terminate idle backgrounds in Manifest V3.
-// Any listener directly added during add-on startup will be registered as a
-// persistent listener and the background will wake up (restart) each time the
-// event is fired. 
+// Menu items for the menu-typed action and message_display_action buttons.
+messenger.menus.create({
+    id: "analyse",
+    title: "Analyse",
+    contexts: ["action_menu", "message_display_action_menu"]
+});
 
-/**
- * The Manifest V2 version of this extension is adding a temporary `runtime.onMessage`
- * event listener for the opened prompt popup. Such listeners are not registered
- * as persistent listeners and will not wake up the background, if the the popup
- * stays open longer then the background idle timeout without the user interacting
- * with it.
- * 
- * To make the example work in Manifest V3, the popup sends a periodic ping to a
- * `runtime.onMessage` listener in the background, to keep the background busy.
- * 
- * Alternatively, a global persistent `runtime.onMessage` event listener could have
- * been used. The `optIn` example extension has been updated by using such a global
- * persistent event listener.
- */
+messenger.menus.create({
+    id: "config",
+    title: "Config",
+    contexts: ["action_menu", "message_display_action_menu"]
+});
+
+messenger.menus.onClicked.addListener((info, tab) => {
+    if (info.menuItemId === "analyse") {
+        awaitPopup(tab ? tab.id : null);
+    } else if (info.menuItemId === "config") {
+        openConfig(tab);
+    }
+});
 
 // Function to open a popup and await user feedback
 async function awaitPopup(tabId = null) {
@@ -40,7 +41,7 @@ async function awaitPopup(tabId = null) {
                 if (sender.tab.windowId != popupId || !request) {
                     return;
                 }
-                
+
                 if (request.popupResponse) {
                     response = request.popupResponse;
                 }
@@ -66,14 +67,12 @@ async function awaitPopup(tabId = null) {
     console.log(rv);
 }
 
-// Listener to trigger the popup.
-messenger.action.onClicked.addListener((tab) => {
-    awaitPopup(tab.id);
-});
-
-
-// Écoute quand un message est affiché
-messenger.messageDisplay.onMessagesDisplayed.addListener(async (tab, messages) => {
-    await awaitPopup(tab.id);
-});
-
+async function openConfig(tab) {
+    await messenger.windows.create({
+        url: "config.html",
+        type: "popup",
+        height: 250,
+        width: 450,
+        allowScriptsToClose: true,
+    });
+}
