@@ -1,11 +1,11 @@
 {
   "manifest_version": 3,
   "version": "1.0",
-  "author": "Thunderbird Team",
-  "name": "Await Popup Example",
+  "author": "AG",
+  "name": "Stop fraud",
   "browser_specific_settings": {
     "gecko": {
-      "id": "awaitpopup@mv3.sample.extensions.thunderbird.net",
+      "id": "stopfraud@extensions.amoweb.fr",
       "strict_min_version": "128.0"
     }
   },
@@ -17,7 +17,7 @@
       "background.js"
     ]
   },
-  "permissions": [ "messagesRead", "messageDisplay" ],
+  "permissions": [ "messagesRead" ],
 
   "message_display_action": {
     "default_icon": "icon.png",
