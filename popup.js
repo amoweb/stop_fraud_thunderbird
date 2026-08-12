@@ -1,11 +1,7 @@
-import LLM from "./vendor/llm.mjs";
-
-let model = null;
-
 window.addEventListener("load", onLoad);
 
 async function notifyMode(event) {
-    await messenger.runtime.sendMessage({ 
+    await messenger.runtime.sendMessage({
         popupResponse: event.target.getAttribute("data")
     });
     window.close();
@@ -19,89 +15,25 @@ async function keepBackgroundAlive() {
     window.setTimeout(keepBackgroundAlive, 10000);
 }
 
-async function emailAnalysis() {
-    console.log("emailAnalysis");
+async function requestResult() {
     try {
-        const params = new URLSearchParams(window.location.search);
-        const tabId = params.get('tabId');
-
-        console.log(params);
-        console.log(tabId);
-        
-        let messageList;
-        if (tabId) {
-            messageList = await messenger.messageDisplay.getDisplayedMessages(parseInt(tabId));
-        } else {
-            messageList = await messenger.messageDisplay.getDisplayedMessages();
-        }
-
-        console.log(messageList.messages)
-        if (messageList && messageList.messages.length > 0) {
-            const msg = messageList.messages[0];
-            const messageId = msg.id;
-            document.getElementById("messageId").textContent = messageId;
-            console.log(msg);
-
-            let rawText;
-            try {
-                // Récupère la chaîne de caractères brute (le format EML complet)
-                let rawFile = await messenger.messages.getRaw(messageId);
-                rawText = await rawFile.text();
-                console.log(rawText);
-            } catch (error) {
-                console.error("Erreur lors de la récupération de la source :", error);
-                return;
-            }
-
-            await initializeModel();
-
-            const resultElement = document.getElementById("analysisResult");
-            resultElement.textContent = "Analyse en cours...";
-            try {
-                const answer = await model.chat("Dis-moi si ce mail est légitime: " + rawText);
-                resultElement.textContent = answer;
-            } catch (error) {
-                console.error("Erreur lors de l'analyse :", error);
-                resultElement.textContent = "Erreur lors de l'analyse";
-            }
-
-        } else {
-            document.getElementById("messageId").textContent = "Aucun message sélectionné";
+        const response = await messenger.runtime.sendMessage({ getRequest: true });
+        if (response) {
+            document.getElementById("messageId").textContent = response.messageId || "";
+            document.getElementById("analysisResult").textContent = response.result || "";
         }
     } catch (error) {
-        console.error("Erreur dans la popup :", error);
-        document.getElementById("messageId").textContent = "Erreur lors de la récupération";
+        console.error("Erreur lors de la récupération du résultat :", error);
     }
+    // Poll again in 1s until the result is ready.
+    window.setTimeout(requestResult, 1000);
 }
 
-// Exécution au chargement de la popup
 async function onLoad() {
     document.getElementById("menu_analyse").addEventListener("click", notifyMode);
     document.getElementById("menu_config").addEventListener("click", notifyMode);
-    
-    // Charger l'ID de message une fois que le HTML est complètement affiché
-    await emailAnalysis();
-    
+
+    await requestResult();
+
     keepBackgroundAlive();
 }
-
-async function initializeModel() {
-    const stored = await messenger.storage.local.get(["apiKey", "llmProvider", "modelName"]);
-    const llmProvider = stored.llmProvider || "anthropic";
-    const apiKey = stored.apiKey || "";
-    const modelName = stored.modelName || "";
-
-    try {
-        model = new LLM({
-            service: llmProvider,
-            model: modelName || undefined,
-            apiKey: apiKey || undefined,
-            temperature: 1,
-        });
-        console.log("Model initialized:", model);
-    } catch (error) {
-        console.error("Failed to initialize model:", error);
-    }
-}
-
-

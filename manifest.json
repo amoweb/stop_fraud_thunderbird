@@ -1,34 +1,43 @@
 {
-  "manifest_version": 3,
-  "version": "1.0",
-  "author": "AG",
-  "name": "Stop fraud",
-  "browser_specific_settings": {
-    "gecko": {
-      "id": "stopfraud@extensions.amoweb.fr",
-      "strict_min_version": "128.0"
-    }
-  },
-  "action": {
-    "default_title": "Stop fraud",
-    "type": "menu"
-  },
-  "background": {
-    "scripts": [
-      "background.js"
-    ]
-  },
-  "permissions": [ "messagesRead", "menus", "storage" ],
+    "manifest_version": 3,
+    "version": "1.0",
+    "author": "AG",
+    "name": "Stop fraud",
+    "browser_specific_settings": {
+        "gecko": {
+            "id": "stopfraud@extensions.amoweb.fr",
+            "strict_min_version": "128.0"
+        }
+    },
+    "action": {
+        "default_title": "Stop fraud",
+        "type": "menu"
+    },
+    "background": {
+        "scripts": ["background.js"],
+        "type": "module"
+    },
+    "permissions": ["messagesRead", "menus", "storage"],
+    "host_permissions": [
+        "https://api.anthropic.com/*",
+        "https://api.openai.com/*",
+        "https://generativelanguage.googleapis.com/*",
+        "https://api.x.ai/*",
+        "https://api.groq.com/*",
+        "https://api.deepseek.com/*",
+        "http://localhost/*",
+        "http://127.0.0.1/*"
+    ],
 
-  "options_ui": {
+    "options_ui": {
         "page": "config.html",
         "open_in_tab": false,
         "browser_style": false
     },
 
-  "message_display_action": {
-    "default_icon": "icon.png",
-    "default_title": "Stop fraud",
-    "type": "menu"
-  }
+    "message_display_action": {
+        "default_icon": "icon.png",
+        "default_title": "Stop fraud",
+        "type": "menu"
+    }
 }
