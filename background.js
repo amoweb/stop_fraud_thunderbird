@@ -69,12 +69,17 @@ async function awaitPopupClose(popupId) {
 }
 
 async function analyseAndShowResult(tabId = null) {
-    await initializeModel();
     lastAnalysisResult = { messageId: "", result: "Analyse en cours..." };
     // Open popup BEFORE analysis so its keepBackgroundAlive prevents the
     // MV3 event page from being suspended during the long LLM fetch.
     const popupId = await createPopup();
-    await emailAnalysis(tabId);
+    try {
+        await initializeModel();
+        await emailAnalysis(tabId);
+    } catch (error) {
+        console.error("Erreur lors de l'analyse :", error);
+        lastAnalysisResult = { messageId: "", result: String(error) };
+    }
     await awaitPopupClose(popupId);
 }
 
