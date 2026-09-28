@@ -1,5 +1,12 @@
 import { z } from 'zod/v4';
-import { mistral } from '@ai-sdk/mistral';
+import { createAnthropic } from '@ai-sdk/anthropic';
+import { createDeepSeek } from '@ai-sdk/deepseek';
+import { createGoogleGenerativeAI } from '@ai-sdk/google';
+import { createGroq } from '@ai-sdk/groq';
+import { createMistral } from '@ai-sdk/mistral';
+import { createOpenAI } from '@ai-sdk/openai';
+import { createOpenAICompatible } from '@ai-sdk/openai-compatible';
+import { createXai } from '@ai-sdk/xai';
 import { generateText } from 'ai';
 
 // Disable Zod's JIT evaluation (`new Function`), which is blocked by the
@@ -127,12 +134,12 @@ async function emailAnalysis(tabId) {
             }
 
             try {
-                const { answer } = await generateText({
+                const { text } = await generateText({
                     model,
                     prompt: "Dis-moi si ce mail est légitime: " + rawText,
                 });
 
-                lastAnalysisResult = { messageId: String(messageId), result: answer };
+                lastAnalysisResult = { messageId: String(messageId), result: text };
             } catch (error) {
                 console.error("Erreur lors de l'analyse :", error);
                 lastAnalysisResult = { messageId: String(messageId), result: "Erreur lors de l'analyse " + String(error) };
@@ -155,10 +162,65 @@ async function initializeModel() {
 
     switch (llmProvider)
     {
-        case "mistral":
-            const mistral = createMistral({ apiKey: apiKey });
-            model = mistral('mistral-large-latest');
+        case "anthropic": {
+            const provider = createAnthropic({ apiKey: apiKey });
+            model = provider(modelName || 'claude-sonnet-4-5');
             break;
+        }
+        case "deepseek": {
+            const provider = createDeepSeek({ apiKey: apiKey });
+            model = provider(modelName || 'deepseek-chat');
+            break;
+        }
+        case "google": {
+            const provider = createGoogleGenerativeAI({ apiKey: apiKey });
+            model = provider(modelName || 'gemini-2.5-flash');
+            break;
+        }
+        case "groq": {
+            const provider = createGroq({ apiKey: apiKey });
+            model = provider(modelName || 'llama-3.3-70b-versatile');
+            break;
+        }
+        case "lms": {
+            const provider = createOpenAICompatible({
+                name: "lmstudio",
+                baseURL: "http://localhost:1234/v1",
+                apiKey: apiKey || "lm-studio",
+            });
+            model = provider(modelName || 'default');
+            break;
+        }
+        case "mistral": {
+            const provider = createMistral({ apiKey: apiKey });
+            model = provider(modelName || 'mistral-large-latest');
+            break;
+        }
+        case "ollama": {
+            const provider = createOpenAICompatible({
+                name: "ollama",
+                baseURL: "http://localhost:11434/v1",
+                apiKey: apiKey || "ollama",
+            });
+            model = provider(modelName || 'llama3.2');
+            break;
+        }
+        case "openai": {
+            const provider = createOpenAI({ apiKey: apiKey });
+            model = provider(modelName || 'gpt-5-mini');
+            break;
+        }
+        case "xai": {
+            const provider = createXai({ apiKey: apiKey });
+            model = provider(modelName || 'grok-4-fast');
+            break;
+        }
+        default:
+            throw new Error("Provider LLM non supporté : " + llmProvider);
+    }
+
+    if (!model) {
+        throw new Error("Modèle non initialisé");
     }
 }
 

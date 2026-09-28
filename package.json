@@ -7,7 +7,7 @@
   "private": true,
   "scripts": {
     "lint": "web-ext lint",
-    "build": "esbuild background.js config.js manifest.json popup.js --bundle --platform=browser --outdir=dist/ && cp -r *.html manifest.json dist/",
+    "build": "node build.mjs && cp -r *.html manifest.json dist/",
     "start": "web-ext run --target=thunderbird",
     "format": "prettier --write \"**/*.{js,html,json,md}\""
   },
@@ -17,7 +17,14 @@
     "web-ext": "^10.7.0"
   },
   "dependencies": {
+    "@ai-sdk/anthropic": "^4.0.66",
+    "@ai-sdk/deepseek": "^3.0.55",
+    "@ai-sdk/google": "^4.0.84",
+    "@ai-sdk/groq": "^4.0.51",
     "@ai-sdk/mistral": "^4.0.53",
+    "@ai-sdk/openai": "^4.0.79",
+    "@ai-sdk/openai-compatible": "^3.0.58",
+    "@ai-sdk/xai": "^5.0.11",
     "ai": "^7.0.119",
     "zod": "^3.25.76"
   },
