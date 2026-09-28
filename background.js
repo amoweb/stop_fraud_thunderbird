@@ -1,4 +1,10 @@
-import LLM from "./vendor/llm.mjs";
+import { z } from 'zod/v4';
+import { mistral } from '@ai-sdk/mistral';
+import { generateText } from 'ai';
+
+// Disable Zod's JIT evaluation (`new Function`), which is blocked by the
+// extension CSP (`script-src 'self'`) and logs CSP violations to the console.
+z.config({ jitless: true });
 
 let model = null;
 let lastAnalysisResult = { messageId: "", result: "" };
@@ -121,7 +127,11 @@ async function emailAnalysis(tabId) {
             }
 
             try {
-                const answer = await model.chat("Dis-moi si ce mail est légitime: " + rawText);
+                const { answer } = await generateText({
+                    model,
+                    prompt: "Dis-moi si ce mail est légitime: " + rawText,
+                });
+
                 lastAnalysisResult = { messageId: String(messageId), result: answer };
             } catch (error) {
                 console.error("Erreur lors de l'analyse :", error);
@@ -142,16 +152,13 @@ async function initializeModel() {
     const apiKey = stored.apiKey || "";
     const modelName = stored.modelName || "";
 
-    try {
-        model = new LLM({
-            service: llmProvider,
-            model: modelName || undefined,
-            apiKey: apiKey || undefined,
-            temperature: 1
-        });
-        console.log("Model initialized:", model);
-    } catch (error) {
-        console.error("Failed to initialize model:", error);
+
+    switch (llmProvider)
+    {
+        case "mistral":
+            const mistral = createMistral({ apiKey: apiKey });
+            model = mistral('mistral-large-latest');
+            break;
     }
 }
 
