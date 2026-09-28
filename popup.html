@@ -5,17 +5,22 @@
 	<head>
 		<title>Popup</title>
 		<script type="module" src="popup.js"></script>
+		<style>
+			html, body {
+				min-width: 600px;
+				max-width: 800px;
+				min-height: 400px;
+				margin: 0;
+			}
+		</style>
 	</head>
 
 	<body>
-		<div style="height: 200px; width: 50%; background-color: red;">
+		<div style="min-height: 400px; padding: 10px;">
 			<ul id="menu" style="list-style: none; margin: 0; padding: 0;">
 				<li id="menu_analyse" data="analyse" style="padding: 5px; cursor: pointer;">Analyse</li>
 				<li id="menu_config" data="config" style="padding: 5px; cursor: pointer;">Config</li>
 			</ul>
-			<br />
-			Message ID = <div id="messageId"></div>.
-			<br />
 			<div id="analysisResult"></div>
 		</div>
 	</body>

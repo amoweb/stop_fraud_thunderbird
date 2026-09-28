@@ -100,8 +100,8 @@ async function createPopup() {
     const win = await messenger.windows.create({
         url: "popup.html",
         type: "popup",
-        height: 280,
-        width: 390,
+        height: 800,
+        width: 800,
         allowScriptsToClose: true
     });
     return win.id;
