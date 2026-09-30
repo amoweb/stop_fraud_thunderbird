@@ -19,7 +19,10 @@ async function requestResult() {
     try {
         const response = await messenger.runtime.sendMessage({ getRequest: true });
         if (response) {
-            document.getElementById("messageId").textContent = response.messageId || "";
+            const messageIdEl = document.getElementById("messageId");
+            if (messageIdEl) {
+                messageIdEl.textContent = response.messageId || "";
+            }
             displayAnalysis(response.result || "");
         }
     } catch (error) {
