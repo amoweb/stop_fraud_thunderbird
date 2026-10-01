@@ -18,7 +18,7 @@
         "scripts": ["background.js"],
         "type": "module"
     },
-    "permissions": ["messagesRead", "menus", "storage"],
+    "permissions": ["messagesRead", "menus", "storage", "scripting"],
     "host_permissions": [
         "https://api.anthropic.com/*",
         "https://api.openai.com/*",

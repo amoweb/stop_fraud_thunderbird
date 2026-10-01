@@ -22,12 +22,15 @@ const forceEsmZod = {
 };
 
 await build({
-    entryPoints: ["background.js", "config.js", "manifest.json", "popup.js"],
+    entryPoints: ["background.js", "config.js", "link_dialog.js", "link_interceptor.js", "manifest.json", "popup.js"],
     bundle: true,
     platform: "browser",
     outdir: "dist",
     plugins: [forceEsmZod]
 });
 
-// Localization catalogs are not JS entry points, so copy them as-is.
+// Localization catalogs and standalone (non-bundled) scripts used by
+// message_display_scripts and link_dialog.html are copied as-is.
 cpSync("_locales", "dist/_locales", { recursive: true });
+cpSync("link_interceptor.js", "dist/link_interceptor.js");
+cpSync("link_dialog.js", "dist/link_dialog.js");

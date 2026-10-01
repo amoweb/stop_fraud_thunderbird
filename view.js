@@ -22,42 +22,55 @@ export async function createPopup() {
     return win.id;
 }
 
+// Awaits the closure of a popup window, resolving with the response the popup
+// sent in `request[responseField]` (defaultResponse if it closes without one).
+function awaitPopupResponse(popupId, responseField, defaultResponse) {
+    return new Promise((resolve) => {
+        let response = defaultResponse;
+        function windowRemoveListener(closedId) {
+            if (popupId == closedId) {
+                messenger.windows.onRemoved.removeListener(windowRemoveListener);
+                messenger.runtime.onMessage.removeListener(messageListener);
+                resolve(response);
+            }
+        }
+        function messageListener(request, sender, sendResponse) {
+            if ((sender.tab && sender.tab.windowId != popupId) || !request) {
+                return;
+            }
+
+            if (request[responseField] !== void 0) {
+                response = request[responseField];
+            }
+        }
+        messenger.runtime.onMessage.addListener(messageListener);
+        messenger.windows.onRemoved.addListener(windowRemoveListener);
+    });
+}
+
 // Function to open a popup and await user feedback
 export async function awaitPopupClose(popupId) {
-    async function popupPrompt(popupId, defaultResponse) {
-        try {
-            await messenger.windows.get(popupId);
-        } catch (e) {
-            // Window does not exist, assume closed.
-            return defaultResponse;
-        }
-        return new Promise((resolve) => {
-            let response = defaultResponse;
-            function windowRemoveListener(closedId) {
-                if (popupId == closedId) {
-                    messenger.windows.onRemoved.removeListener(windowRemoveListener);
-                    messenger.runtime.onMessage.removeListener(messageListener);
-                    resolve(response);
-                }
-            }
-            function messageListener(request, sender, sendResponse) {
-                if (sender.tab && sender.tab.windowId != popupId || !request) {
-                    return;
-                }
-
-                if (request.popupResponse) {
-                    response = request.popupResponse;
-                }
-                if (request.ping) {
-                    console.log("Background ping");
-                }
-            }
-            messenger.runtime.onMessage.addListener(messageListener);
-            messenger.windows.onRemoved.addListener(windowRemoveListener);
-        });
-    }
-    let rv = await popupPrompt(popupId, "cancel");
+    let rv = await awaitPopupResponse(popupId, "popupResponse", "cancel");
     console.log(rv);
+}
+
+// Creates the link-intercept dialog showing the destination URL.
+export async function createLinkDialog(url) {
+    const encoded = encodeURIComponent(url);
+    const win = await messenger.windows.create({
+        url: `link_dialog.html?url=${encoded}`,
+        type: "popup",
+        height: 400,
+        width: 600,
+        allowScriptsToClose: true
+    });
+    return win.id;
+}
+
+// Awaits the user's choice in the link-intercept dialog:
+// "open", "analyse" or "cancel".
+export async function awaitLinkDialog(popupId) {
+    return awaitPopupResponse(popupId, "linkDialogResponse", "cancel");
 }
 
 export async function openConfig(tab) {
