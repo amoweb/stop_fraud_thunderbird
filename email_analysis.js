@@ -154,7 +154,7 @@ export async function emailAnalysis(tabId) {
 // Enlève les pièces jointes avant l'analyse
 export function removeMimeJoinedFile(raw) {
     console.log(raw);
-    const regex = /^--[^\r\n]*\r?\n(?:[A-Za-z-]+:[^\r\n]*\r?\n|[ \t][^\r\n]*\r?\n)*Content-Type:[^\r\n]*(?:pdf|image|zip)[^\r\n]*\r?\n(?:[A-Za-z-]+:[^\r\n]*\r?\n|[ \t][^\r\n]*\r?\n)*\r?\n(?:[A-Za-z0-9+/=]{1,76}\r?\n)+/gmi;
+    const regex = /^--[^\r\n]*\r?\n(?:[A-Za-z-]+:[^\r\n]*\r?\n|[ \t][^\r\n]*\r?\n)*Content-Type:[^\r\n]*(?:pdf|image|zip|msword|excel|powerpoint|officedocument|rtf|octet-stream)[^\r\n]*\r?\n(?:[A-Za-z-]+:[^\r\n]*\r?\n|[ \t][^\r\n]*\r?\n)*\r?\n(?:[A-Za-z0-9+/=]{1,76}\r?\n)+/gmi;
     const cleaned = raw.replace(regex, '');
     console.log(cleaned);
     return cleaned;
