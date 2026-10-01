@@ -39,6 +39,10 @@
         "message": "URL de base :",
         "description": "Label of the base URL field, only enabled for the OpenAI compatible provider."
     },
+    "interceptLinksLabel": {
+        "message": "Intercepter les clics sur les liens dans les courriels",
+        "description": "Libellé de la case à cocher qui active l'interception des liens dans les courriels."
+    },
     "analysisInProgress": {
         "message": "Analyse en cours...",
         "description": "Message affiché pendant l'analyse."

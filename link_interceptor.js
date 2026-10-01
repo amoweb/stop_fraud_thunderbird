@@ -22,6 +22,11 @@
         if (dialogInProgress) return;
         if (!isRelevantClick(event)) return;
 
+        // Link interception can be disabled in the configuration page
+        // (checked by default => only an explicit false disables it).
+        const stored = await browser.storage.local.get("interceptLinks");
+        if (stored.interceptLinks === false) return;
+
         // closest() handles clicks on children of the link (img, span, ...).
         const link = event.target && event.target.closest && event.target.closest("a[href]");
         if (!link) return;

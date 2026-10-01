@@ -77,7 +77,7 @@ export async function openConfig(tab) {
     await messenger.windows.create({
         url: "config.html",
         type: "popup",
-        height: 510,
+        height: 600,
         width: 450,
         allowScriptsToClose: true
     });

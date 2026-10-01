@@ -39,6 +39,10 @@
         "message": "Base URL:",
         "description": "Label of the base URL field, only enabled for the OpenAI compatible provider."
     },
+    "interceptLinksLabel": {
+        "message": "Intercept link clicks in emails",
+        "description": "Label of the checkbox that enables link interception in emails."
+    },
     "analysisInProgress": {
         "message": "Analysis in progress...",
         "description": "Message shown while the analysis is running."
