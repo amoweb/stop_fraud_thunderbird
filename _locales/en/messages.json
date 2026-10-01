@@ -1,0 +1,70 @@
+{
+    "extensionName": {
+        "message": "Stop fraud",
+        "description": "Name of the extension shown in the add-ons manager and menu buttons."
+    },
+    "menuAnalyse": {
+        "message": "Analyse",
+        "description": "Menu item that starts the analysis of the displayed message."
+    },
+    "menuConfig": {
+        "message": "Config",
+        "description": "Menu item that opens the configuration window."
+    },
+    "configPageTitle": {
+        "message": "Config",
+        "description": "Title of the configuration window."
+    },
+    "popupPageTitle": {
+        "message": "Popup",
+        "description": "Title of the analysis popup window."
+    },
+    "providerLabel": {
+        "message": "Provider:",
+        "description": "Label of the LLM provider selection field."
+    },
+    "apiKeyLabel": {
+        "message": "API Key:",
+        "description": "Label of the API key field."
+    },
+    "modelNameLabel": {
+        "message": "Model Name:",
+        "description": "Label of the model name field."
+    },
+    "saveButton": {
+        "message": "Save",
+        "description": "Button that saves the configuration."
+    },
+    "providerOpenaiCompatible": {
+        "message": "OpenAI compatible (Lyceum)",
+        "description": "Display name of the OpenAI compatible provider."
+    },
+    "analysisInProgress": {
+        "message": "Analysis in progress...",
+        "description": "Message shown while the analysis is running."
+    },
+    "noMessageSelected": {
+        "message": "No message selected",
+        "description": "Message shown when no email is selected."
+    },
+    "errorFetchingSource": {
+        "message": "Error retrieving the message source",
+        "description": "Error shown when the raw email source cannot be read."
+    },
+    "errorDuringAnalysis": {
+        "message": "Error during analysis",
+        "description": "Error prefix shown when the LLM request fails."
+    },
+    "errorInAnalysis": {
+        "message": "Error in analysis:",
+        "description": "Error prefix shown when the analysis throws unexpectedly."
+    },
+    "unsupportedProvider": {
+        "message": "Unsupported LLM provider: ",
+        "description": "Error prefix shown when the configured provider is unknown."
+    },
+    "modelNotInitialized": {
+        "message": "Model not initialized",
+        "description": "Error shown when no LLM model could be created."
+    }
+}

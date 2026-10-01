@@ -1,0 +1,70 @@
+{
+    "extensionName": {
+        "message": "Stop fraud",
+        "description": "Nom de l'extension affiché dans le gestionnaire de modules et sur les boutons de menu."
+    },
+    "menuAnalyse": {
+        "message": "Analyser",
+        "description": "Élément de menu qui lance l'analyse du message affiché."
+    },
+    "menuConfig": {
+        "message": "Configuration",
+        "description": "Élément de menu qui ouvre la fenêtre de configuration."
+    },
+    "configPageTitle": {
+        "message": "Configuration",
+        "description": "Titre de la fenêtre de configuration."
+    },
+    "popupPageTitle": {
+        "message": "Analyse",
+        "description": "Titre de la fenêtre d'analyse."
+    },
+    "providerLabel": {
+        "message": "Fournisseur :",
+        "description": "Libellé du champ de sélection du fournisseur LLM."
+    },
+    "apiKeyLabel": {
+        "message": "Clé API :",
+        "description": "Libellé du champ de clé API."
+    },
+    "modelNameLabel": {
+        "message": "Nom du modèle :",
+        "description": "Libellé du champ du nom du modèle."
+    },
+    "saveButton": {
+        "message": "Enregistrer",
+        "description": "Bouton qui enregistre la configuration."
+    },
+    "providerOpenaiCompatible": {
+        "message": "Compatible OpenAI (Lyceum)",
+        "description": "Nom affiché du fournisseur compatible OpenAI."
+    },
+    "analysisInProgress": {
+        "message": "Analyse en cours...",
+        "description": "Message affiché pendant l'analyse."
+    },
+    "noMessageSelected": {
+        "message": "Aucun message sélectionné",
+        "description": "Message affiché lorsqu'aucun courriel n'est sélectionné."
+    },
+    "errorFetchingSource": {
+        "message": "Erreur lors de la récupération de la source",
+        "description": "Erreur affichée lorsque la source brute du courriel ne peut pas être lue."
+    },
+    "errorDuringAnalysis": {
+        "message": "Erreur lors de l'analyse",
+        "description": "Préfixe d'erreur affiché lorsque la requête au LLM échoue."
+    },
+    "errorInAnalysis": {
+        "message": "Erreur dans l'analyse :",
+        "description": "Préfixe d'erreur affiché lorsque l'analyse échoue de façon inattendue."
+    },
+    "unsupportedProvider": {
+        "message": "Fournisseur LLM non supporté : ",
+        "description": "Préfixe d'erreur affiché lorsque le fournisseur configuré est inconnu."
+    },
+    "modelNotInitialized": {
+        "message": "Modèle non initialisé",
+        "description": "Erreur affichée lorsqu'aucun modèle LLM n'a pu être créé."
+    }
+}

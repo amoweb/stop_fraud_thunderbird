@@ -2,7 +2,8 @@
     "manifest_version": 3,
     "version": "1.0",
     "author": "AG",
-    "name": "Stop fraud",
+    "name": "__MSG_extensionName__",
+    "default_locale": "en",
     "browser_specific_settings": {
         "gecko": {
             "id": "stopfraud@extensions.amoweb.fr",
@@ -10,7 +11,7 @@
         }
     },
     "action": {
-        "default_title": "Stop fraud",
+        "default_title": "__MSG_extensionName__",
         "type": "menu"
     },
     "background": {
@@ -37,7 +38,7 @@
 
     "message_display_action": {
         "default_icon": "icon.png",
-        "default_title": "Stop fraud",
+        "default_title": "__MSG_extensionName__",
         "type": "menu"
     }
 }

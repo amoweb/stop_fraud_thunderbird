@@ -65,10 +65,17 @@ function displayAnalysis(text) {
 }
 
 async function onLoad() {
+    localize();
     document.getElementById("menu_analyse").addEventListener("click", notifyMode);
     document.getElementById("menu_config").addEventListener("click", notifyMode);
 
     await requestResult();
 
     keepBackgroundAlive();
+}
+
+function localize() {
+    document.title = messenger.i18n.getMessage("popupPageTitle");
+    document.getElementById("menu_analyse").textContent = messenger.i18n.getMessage("menuAnalyse");
+    document.getElementById("menu_config").textContent = messenger.i18n.getMessage("menuConfig");
 }

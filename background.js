@@ -16,9 +16,7 @@ messenger.runtime.onMessage.addListener((request, sender, sendResponse) => {
 });
 
 async function analyseAndShowResult(tabId = null) {
-    setLastAnalysisResult("", "Analyse en cours...");
-    // Open popup BEFORE analysis so its keepBackgroundAlive prevents the
-    // MV3 event page from being suspended during the long LLM fetch.
+    setLastAnalysisResult("", messenger.i18n.getMessage("analysisInProgress"));
     const popupId = await createPopup();
     try {
         await initializeModel();

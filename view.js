@@ -1,13 +1,13 @@
 // Menu items for the menu-typed action and message_display_action buttons.
 messenger.menus.create({
     id: "analyse",
-    title: "Analyse",
+    title: messenger.i18n.getMessage("menuAnalyse"),
     contexts: ["action_menu", "message_display_action_menu"]
 });
 
 messenger.menus.create({
     id: "config",
-    title: "Config",
+    title: messenger.i18n.getMessage("menuConfig"),
     contexts: ["action_menu", "message_display_action_menu"]
 });
 

@@ -85,11 +85,11 @@ export async function initializeModel() {
             break;
         }
         default:
-            throw new Error("Provider LLM non supporté : " + llmProvider);
+            throw new Error(messenger.i18n.getMessage("unsupportedProvider") + llmProvider);
     }
 
     if (!model) {
-        throw new Error("Modèle non initialisé");
+        throw new Error(messenger.i18n.getMessage("modelNotInitialized"));
     }
 }
 
@@ -115,7 +115,7 @@ export async function emailAnalysis(tabId) {
                 rawText = await rawFile.text();
             } catch (error) {
                 console.error("Erreur lors de la récupération de la source :", error);
-                setLastAnalysisResult("", "Erreur lors de la récupération de la source");
+                setLastAnalysisResult("", messenger.i18n.getMessage("errorFetchingSource"));
                 return;
             }
 
@@ -130,13 +130,13 @@ export async function emailAnalysis(tabId) {
                 console.log(text);
             } catch (error) {
                 console.error("Erreur lors de l'analyse :", error);
-                setLastAnalysisResult(String(messageId), "Erreur lors de l'analyse " + String(error));
+                setLastAnalysisResult(String(messageId), messenger.i18n.getMessage("errorDuringAnalysis") + " " + String(error));
             }
         } else {
-            setLastAnalysisResult("Aucun message sélectionné", "");
+            setLastAnalysisResult("", messenger.i18n.getMessage("noMessageSelected"));
         }
     } catch (error) {
         console.error("Erreur dans l'analyse :", error);
-        setLastAnalysisResult("", "Erreur dans l'analyse : " + String(error));
+        setLastAnalysisResult("", messenger.i18n.getMessage("errorInAnalysis") + " " + String(error));
     }
 }
