@@ -27,7 +27,10 @@
         "https://api.groq.com/*",
         "https://api.deepseek.com/*",
         "http://localhost/*",
-        "http://127.0.0.1/*"
+        "http://127.0.0.1/*",
+        "https://api.lyceum.technology/*",
+        "https://api.scaleway.ai/*",
+        "https://eu.api.ovh.com/"
     ],
 
     "options_ui": {

@@ -15,7 +15,7 @@
 				<option value="deepseek">deepseek</option>
 				<option value="google">google</option>
 				<option value="groq">groq</option>
-                <option value="openai-compatible" id="providerOpenaiCompatible">OpenAI compatible (Lyceum)</option>
+                <option value="openai-compatible">OpenAI compatible (Lyceum, Scaleway, OVH, local)</option>
 				<option value="mistral">mistral</option>
 				<option value="ollama">ollama</option>
 				<option value="openai">openai</option>
@@ -27,6 +27,9 @@
 			<br /><br />
 			<label for="modelName" id="modelNameLabel">Model Name:</label><br />
 			<input type="text" id="modelName" style="width: 100%; margin-top: 5px;" />
+			<br /><br />
+			<label for="baseURL" id="baseURLLabel">Base URL:</label><br />
+			<input type="text" id="baseURL" placeholder="http://localhost:1234/v1" style="width: 100%; margin-top: 5px;" />
 			<br /><br />
 			<button id="save">Save</button>
 		</div>

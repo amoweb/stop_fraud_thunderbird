@@ -23,10 +23,11 @@ export function setLastAnalysisResult(messageId, result) {
 }
 
 export async function initializeModel() {
-    const stored = await messenger.storage.local.get(["apiKey", "llmProvider", "modelName"]);
+    const stored = await messenger.storage.local.get(["apiKey", "llmProvider", "modelName", "baseURL"]);
     const llmProvider = stored.llmProvider || "anthropic";
     const apiKey = stored.apiKey || "";
     const modelName = stored.modelName || "";
+    const baseURL = stored.baseURL || "";
 
 
     switch (llmProvider)
@@ -54,7 +55,7 @@ export async function initializeModel() {
         case "openai-compatible": {
             const provider = createOpenAICompatible({
                 name: "lmstudio",
-                baseURL: "http://localhost:1234/v1",
+                baseURL: baseURL || "http://localhost:1234/v1",
                 apiKey: apiKey || "lm-studio",
             });
             model = provider(modelName || 'default');

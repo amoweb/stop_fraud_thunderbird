@@ -35,9 +35,9 @@
         "message": "Enregistrer",
         "description": "Bouton qui enregistre la configuration."
     },
-    "providerOpenaiCompatible": {
-        "message": "Compatible OpenAI (Lyceum)",
-        "description": "Nom affiché du fournisseur compatible OpenAI."
+    "baseURLLabel": {
+        "message": "URL de base :",
+        "description": "Label of the base URL field, only enabled for the OpenAI compatible provider."
     },
     "analysisInProgress": {
         "message": "Analyse en cours...",
