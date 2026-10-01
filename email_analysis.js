@@ -120,6 +120,9 @@ export async function emailAnalysis(tabId) {
                 return;
             }
 
+            // Supprime les pièces jointes avant l'analyse
+            rawText = removeMimeJoinedFile(rawText);
+
             const prompt = browser.i18n.getMessage("promptEmailAnalysis", [
                 new Date().toLocaleDateString('fr-FR'), 
                 rawText 
@@ -146,4 +149,13 @@ export async function emailAnalysis(tabId) {
         console.error("Erreur dans l'analyse :", error);
         setLastAnalysisResult("", messenger.i18n.getMessage("errorInAnalysis") + " " + String(error));
     }
+}
+
+// Enlève les pièces jointes avant l'analyse
+export function removeMimeJoinedFile(raw) {
+    console.log(raw);
+    const regex = /^--[^\r\n]*\r?\n(?:[A-Za-z-]+:[^\r\n]*\r?\n|[ \t][^\r\n]*\r?\n)*Content-Type:[^\r\n]*(?:pdf|image|zip)[^\r\n]*\r?\n(?:[A-Za-z-]+:[^\r\n]*\r?\n|[ \t][^\r\n]*\r?\n)*\r?\n(?:[A-Za-z0-9+/=]{1,76}\r?\n)+/gmi;
+    const cleaned = raw.replace(regex, '');
+    console.log(cleaned);
+    return cleaned;
 }
