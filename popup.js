@@ -39,7 +39,7 @@ function displayAnalysis(text) {
         return;
     }
 
-    const match = text.match(/<resume_analyse>([\s\S]*?)<\/resume_analyse>/i);
+    const match = text.match(/<analysis_summary>([\s\S]*?)<\/analysis_summary>/i);
     let resume = "";
     let rest = text;
     if (match) {
