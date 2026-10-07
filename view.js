@@ -1,16 +1,3 @@
-// Menu items for the menu-typed action and message_display_action buttons.
-messenger.menus.create({
-    id: "analyse",
-    title: messenger.i18n.getMessage("menuAnalyse"),
-    contexts: ["action_menu", "message_display_action_menu"]
-});
-
-messenger.menus.create({
-    id: "config",
-    title: messenger.i18n.getMessage("menuConfig"),
-    contexts: ["action_menu", "message_display_action_menu"]
-});
-
 export async function createPopup() {
     const win = await messenger.windows.create({
         url: "popup.html",
@@ -73,12 +60,3 @@ export async function awaitLinkDialog(popupId) {
     return awaitPopupResponse(popupId, "linkDialogResponse", "cancel");
 }
 
-export async function openConfig(tab) {
-    await messenger.windows.create({
-        url: "config.html",
-        type: "popup",
-        height: 600,
-        width: 450,
-        allowScriptsToClose: true
-    });
-}

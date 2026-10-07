@@ -1,11 +1,5 @@
 window.addEventListener("load", onLoad);
 
-async function notifyMode(event) {
-    await messenger.runtime.sendMessage({
-        popupResponse: event.target.getAttribute("data")
-    });
-    window.close();
-}
 
 async function keepBackgroundAlive() {
     await messenger.runtime.sendMessage({
@@ -64,10 +58,15 @@ function displayAnalysis(text) {
     }
 }
 
+async function openConfigPage(event) {
+    event.preventDefault();
+    await messenger.runtime.openOptionsPage();
+    window.close();
+}
+
 async function onLoad() {
     localize();
-    document.getElementById("menu_analyse").addEventListener("click", notifyMode);
-    document.getElementById("menu_config").addEventListener("click", notifyMode);
+    document.getElementById("config_link").addEventListener("click", openConfigPage);
 
     await requestResult();
 
@@ -76,6 +75,5 @@ async function onLoad() {
 
 function localize() {
     document.title = messenger.i18n.getMessage("popupPageTitle");
-    document.getElementById("menu_analyse").textContent = messenger.i18n.getMessage("menuAnalyse");
-    document.getElementById("menu_config").textContent = messenger.i18n.getMessage("menuConfig");
+    document.getElementById("config_link").textContent = messenger.i18n.getMessage("menuConfig");
 }

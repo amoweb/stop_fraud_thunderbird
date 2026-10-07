@@ -1,12 +1,12 @@
 import { initializeModel, emailAnalysis, lastAnalysisResult, setLastAnalysisResult } from "./email_analysis.js";
-import { createPopup, awaitPopupClose, createLinkDialog, awaitLinkDialog, openConfig } from "./view.js";
+import { createPopup, awaitPopupClose, createLinkDialog, awaitLinkDialog } from "./view.js";
 
-messenger.menus.onClicked.addListener((info, tab) => {
-    if (info.menuItemId === "analyse") {
-        analyseAndShowResult(tab ? tab.id : null);
-    } else if (info.menuItemId === "config") {
-        openConfig(tab);
-    }
+messenger.action.onClicked.addListener((tab) => {
+    analyseAndShowResult(tab ? tab.id : null);
+});
+
+messenger.messageDisplayAction.onClicked.addListener((tab) => {
+    analyseAndShowResult(tab ? tab.id : null);
 });
 
 // Register the link interceptor as a message display script (MV3). This

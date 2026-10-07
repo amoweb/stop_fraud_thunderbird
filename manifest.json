@@ -19,14 +19,13 @@
     },
     "action": {
         "default_icon": "res/icon.png",
-        "default_title": "__MSG_extensionName__",
-        "type": "menu"
+        "default_title": "__MSG_menuAnalyse__"
     },
     "background": {
         "scripts": ["background.js"],
         "type": "module"
     },
-    "permissions": ["messagesRead", "menus", "storage", "scripting"],
+    "permissions": ["messagesRead", "storage", "scripting"],
     "host_permissions": [
         "https://api.anthropic.com/*",
         "https://api.openai.com/*",
@@ -49,7 +48,6 @@
 
     "message_display_action": {
         "default_icon": "res/icon.png",
-        "default_title": "__MSG_extensionName__",
-        "type": "menu"
+        "default_title": "__MSG_menuAnalyse__"
     }
 }
