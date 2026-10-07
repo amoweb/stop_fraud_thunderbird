@@ -14,6 +14,7 @@ The analysis can be triggered manually or when a link is clicked in the email.
 
 ## How to compile?
 
+npm install
 npm build run
 
 ## Load plugin in Thunderbird debug mode
