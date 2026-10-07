@@ -1,9 +1,14 @@
 {
     "manifest_version": 3,
     "version": "1.0",
-    "author": "AG",
+    "author": "Amaury Graillat",
     "name": "__MSG_extensionName__",
     "default_locale": "en",
+    "homepage_url": "https://github.com/amoweb/stop_fraud_thunderbird",
+    "developer": {
+        "name": "Amaury Graillat",
+        "url": "https://amoweb.fr"
+    },
     "icons": {
         "16": "res/icon.png",
         "32": "res/icon.png",
