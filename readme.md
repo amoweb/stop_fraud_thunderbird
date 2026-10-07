@@ -12,6 +12,10 @@ The analysis can be triggered manually or when a link is clicked in the email.
 ![link click](screenshots/screenshot2.png)
 ![analysis](screenshots/screenshot2.png)
 
+## How to compile?
+
+npm build run
+
 ## Load plugin in Thunderbird debug mode
 
 Tools --> Developer Tools --> Debug Add-Ons
