@@ -32,5 +32,6 @@ await build({
 // Localization catalogs and standalone (non-bundled) scripts used by
 // message_display_scripts and link_dialog.html are copied as-is.
 cpSync("_locales", "dist/_locales", { recursive: true });
+cpSync("res", "dist/res", { recursive: true });
 cpSync("link_interceptor.js", "dist/link_interceptor.js");
 cpSync("link_dialog.js", "dist/link_dialog.js");
