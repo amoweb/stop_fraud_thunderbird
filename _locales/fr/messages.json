@@ -44,8 +44,8 @@
         "description": "Libellé de la case à cocher qui active l'interception des liens dans les courriels."
     },
     "privacyNote": {
-        "message": "Remarque : le contenu complet du courriel sera envoyé au fournisseur sélectionné afin d'effectuer l'analyse.",
-        "description": "Avertissement de confidentialité affiché au-dessus du bouton Enregistrer sur la page de configuration."
+        "message": "J'accepte que le contenu complet du courriel soit envoyé au fournisseur sélectionné afin d'effectuer l'analyse.",
+        "description": "Libellé de la case à cocher de consentement à la confidentialité affichée au-dessus du bouton Enregistrer sur la page de configuration ; le bouton Enregistrer reste désactivé tant qu'elle n'est pas cochée."
     },
     "analysisInProgress": {
         "message": "Analyse en cours...",

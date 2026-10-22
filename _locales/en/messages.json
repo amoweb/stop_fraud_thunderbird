@@ -44,8 +44,8 @@
         "description": "Label of the checkbox that enables link interception in emails."
     },
     "privacyNote": {
-        "message": "Note: the full contents of the email will be sent to the selected provider in order to perform the analysis.",
-        "description": "Privacy notice shown above the Save button on the configuration page."
+        "message": "I agree that the full contents of the email will be sent to the selected provider in order to perform the analysis.",
+        "description": "Label of the opt-in privacy consent checkbox shown above the Save button on the configuration page; the Save button stays disabled until it is checked."
     },
     "analysisInProgress": {
         "message": "Analysis in progress...",

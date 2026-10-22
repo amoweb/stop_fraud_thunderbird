@@ -2,13 +2,16 @@ window.addEventListener("load", onLoad);
 
 async function onLoad() {
     localize();
-    const stored = await messenger.storage.local.get(["apiKey", "llmProvider", "modelName", "baseURL", "interceptLinks"]);
+    const stored = await messenger.storage.local.get(["apiKey", "llmProvider", "modelName", "baseURL", "interceptLinks", "privacyConsent"]);
     document.getElementById("apiKey").value = stored.apiKey || "";
     document.getElementById("providerList").value = stored.llmProvider || "mistral";
     document.getElementById("modelName").value = stored.modelName || "";
     document.getElementById("baseURL").value = stored.baseURL || "";
     // Checked by default: only false when explicitly stored as false.
     document.getElementById("interceptLinks").checked = stored.interceptLinks !== false;
+    document.getElementById("privacyConsent").checked = stored.privacyConsent === true;
+    document.getElementById("privacyConsent").addEventListener("change", updateSaveState);
+    updateSaveState();
     document.getElementById("save").addEventListener("click", save);
     document.getElementById("providerList").addEventListener("change", onProviderChange);
     // "change" is only fired once for <select> in Thunderbird popup windows;
@@ -47,12 +50,17 @@ function updateBaseURLState() {
     document.getElementById("baseURL").disabled = !isOpenAICompatible;
 }
 
+function updateSaveState() {
+    document.getElementById("save").disabled = !document.getElementById("privacyConsent").checked;
+}
+
 async function save() {
     const apiKey = document.getElementById("apiKey").value;
     const llmProvider = document.getElementById("providerList").value;
     const modelName = document.getElementById("modelName").value;
     const baseURL = document.getElementById("baseURL").value;
     const interceptLinks = document.getElementById("interceptLinks").checked;
-    await messenger.storage.local.set({ apiKey: apiKey, llmProvider: llmProvider, modelName: modelName, baseURL: baseURL, interceptLinks: interceptLinks });
+    const privacyConsent = document.getElementById("privacyConsent").checked;
+    await messenger.storage.local.set({ apiKey: apiKey, llmProvider: llmProvider, modelName: modelName, baseURL: baseURL, interceptLinks: interceptLinks, privacyConsent: privacyConsent });
     window.close();
 }
