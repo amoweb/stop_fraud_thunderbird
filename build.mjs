@@ -22,7 +22,7 @@ const forceEsmZod = {
 };
 
 await build({
-    entryPoints: ["background.js", "config.js", "link_dialog.js", "link_interceptor.js", "manifest.json", "popup.js"],
+    entryPoints: ["background.js", "config.js", "link_dialog.js", "link_interceptor.js", "popup.js"],
     bundle: true,
     platform: "browser",
     outdir: "dist",
