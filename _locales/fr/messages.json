@@ -43,6 +43,10 @@
         "message": "Intercepter les clics sur les liens dans les courriels",
         "description": "Libellé de la case à cocher qui active l'interception des liens dans les courriels."
     },
+    "privacyNote": {
+        "message": "Remarque : le contenu complet du courriel sera envoyé au fournisseur sélectionné afin d'effectuer l'analyse.",
+        "description": "Avertissement de confidentialité affiché au-dessus du bouton Enregistrer sur la page de configuration."
+    },
     "analysisInProgress": {
         "message": "Analyse en cours...",
         "description": "Message affiché pendant l'analyse."

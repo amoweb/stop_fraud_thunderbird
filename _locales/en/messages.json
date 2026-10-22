@@ -43,6 +43,10 @@
         "message": "Intercept link clicks in emails",
         "description": "Label of the checkbox that enables link interception in emails."
     },
+    "privacyNote": {
+        "message": "Note: the full contents of the email will be sent to the selected provider in order to perform the analysis.",
+        "description": "Privacy notice shown above the Save button on the configuration page."
+    },
     "analysisInProgress": {
         "message": "Analysis in progress...",
         "description": "Message shown while the analysis is running."

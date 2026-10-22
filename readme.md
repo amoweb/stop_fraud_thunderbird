@@ -12,6 +12,10 @@ The analysis can be triggered manually or when a link is clicked in the email.
 ![link click](screenshots/screenshot2.png)
 ![analysis](screenshots/screenshot2.png)
 
+## Privacy policy
+
+See [PRIVACY.md](PRIVACY.md).
+
 ## How to compile?
 
 npm 12.1.0 required

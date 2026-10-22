@@ -25,6 +25,7 @@ function localize() {
     document.getElementById("save").textContent = messenger.i18n.getMessage("saveButton");
     document.getElementById("baseURLLabel").textContent = messenger.i18n.getMessage("baseURLLabel");
     document.getElementById("interceptLinksLabel").textContent = messenger.i18n.getMessage("interceptLinksLabel");
+    document.getElementById("privacyNote").textContent = messenger.i18n.getMessage("privacyNote");
 }
 
 const defaultModelNames = {
