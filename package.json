@@ -6,15 +6,12 @@
   "license": "UNLICENSED",
   "private": true,
   "scripts": {
-    "lint": "web-ext lint",
     "build": "node build.mjs && cp -r *.html manifest.json dist/",
-    "start": "web-ext run --target=thunderbird",
     "format": "prettier --write \"**/*.{js,html,json,md}\""
   },
   "devDependencies": {
     "esbuild": "^0.28.2",
-    "prettier": "^3.3.3",
-    "web-ext": "^10.7.0"
+    "prettier": "^3.3.3"
   },
   "dependencies": {
     "@ai-sdk/anthropic": "^4.0.66",
