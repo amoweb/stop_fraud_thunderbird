@@ -26,7 +26,14 @@ async function requestResult() {
     window.setTimeout(requestResult, 1000);
 }
 
+let lastDisplayedText = null;
+
 function displayAnalysis(text) {
+    if (text === lastDisplayedText) {
+        return;
+    }
+    lastDisplayedText = text;
+
     const container = document.getElementById("analysisResult");
     container.textContent = "";
     if (!text) {
@@ -50,11 +57,34 @@ function displayAnalysis(text) {
     }
 
     if (rest) {
+        // Without a summary (e.g. "Analysis in progress..." or an error),
+        // the whole text is the summary: show it directly.
+        const needsToggle = Boolean(resume);
+
         const restDiv = document.createElement("div");
         restDiv.style.fontSize = "smaller";
         restDiv.style.whiteSpace = "pre-wrap";
         restDiv.textContent = rest;
+
+        if (!needsToggle) {
+            container.appendChild(restDiv);
+            return;
+        }
+
+        const detailsButton = document.createElement("button");
+        detailsButton.type = "button";
+        detailsButton.textContent = messenger.i18n.getMessage("seeDetails");
+        detailsButton.style.marginBottom = "5px";
+        container.appendChild(detailsButton);
+
+        restDiv.style.display = "none";
         container.appendChild(restDiv);
+
+        detailsButton.addEventListener("click", () => {
+            const visible = restDiv.style.display !== "none";
+            restDiv.style.display = visible ? "none" : "block";
+            detailsButton.textContent = messenger.i18n.getMessage(visible ? "seeDetails" : "hideDetails");
+        });
     }
 }
 
