@@ -2,7 +2,7 @@
 
 ## What is it?
 
-This plugin use a LLM to detect spam and frodulent email. It sends the complete
+This plugin use a LLM to detect spam and fraudulent email. It sends the complete
 email source code to the LLM which provides an advise. To speed up process,
 enclosed files are ignored.
 
@@ -14,8 +14,13 @@ The analysis can be triggered manually or when a link is clicked in the email.
 
 ## How to compile?
 
+npm 12.1.0 required
+node v26.10.0 required
+
 npm install
 npm build run
+cd dist/
+zip -r ../stop_fraud_thunderbird.xpi *
 
 ## Load plugin in Thunderbird debug mode
 
