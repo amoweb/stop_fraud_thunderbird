@@ -12,6 +12,17 @@
 				min-height: 400px;
 				margin: 0;
 			}
+			#analysisSummary {
+				font-weight: bold;
+				margin-bottom: 10px;
+			}
+			#detailsButton {
+				margin-bottom: 5px;
+			}
+			#analysisDetails {
+				font-size: smaller;
+				white-space: pre-wrap;
+			}
 		</style>
 	</head>
 
@@ -21,7 +32,11 @@
 				<li id="menu_config" style="padding: 5px;"><a id="config_link" href="#">Config</a></li>
 			</ul>
 			<div id="messageId" style="font-size: smaller; color: gray;"></div>
-			<div id="analysisResult"></div>
+			<div id="analysisResult">
+				<div id="analysisSummary"></div>
+				<button id="detailsButton" type="button"></button>
+				<div id="analysisDetails"></div>
+			</div>
 		</div>
 	</body>
 

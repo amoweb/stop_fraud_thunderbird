@@ -34,58 +34,42 @@ function displayAnalysis(text) {
     }
     lastDisplayedText = text;
 
-    const container = document.getElementById("analysisResult");
-    container.textContent = "";
-    if (!text) {
+    const summaryEl = document.getElementById("analysisSummary");
+    const detailsEl = document.getElementById("analysisDetails");
+    const buttonEl = document.getElementById("detailsButton");
+
+    summaryEl.textContent = "";
+    detailsEl.textContent = "";
+    detailsEl.hidden = false;
+    buttonEl.textContent = "";
+
+    const match = text.match(/<analysis_summary>([\s\S]*?)<\/analysis_summary>/i);
+    let rest = text;
+    if (match) {
+        summaryEl.textContent = match[1].trim();
+        rest = text.replace(match[0], "").trim();
+    }
+    if (!rest) {
         return;
     }
 
-    const match = text.match(/<analysis_summary>([\s\S]*?)<\/analysis_summary>/i);
-    let resume = "";
-    let rest = text;
-    if (match) {
-        resume = match[1].trim();
-        rest = text.replace(match[0], "").trim();
-    }
-
-    if (resume) {
-        const resumeDiv = document.createElement("div");
-        resumeDiv.style.fontWeight = "bold";
-        resumeDiv.style.marginBottom = "10px";
-        resumeDiv.textContent = resume;
-        container.appendChild(resumeDiv);
-    }
-
-    if (rest) {
+    detailsEl.textContent = rest;
+    if (!summaryEl.textContent) {
         // Without a summary (e.g. "Analysis in progress..." or an error),
         // the whole text is the summary: show it directly.
-        const needsToggle = Boolean(resume);
-
-        const restDiv = document.createElement("div");
-        restDiv.style.fontSize = "smaller";
-        restDiv.style.whiteSpace = "pre-wrap";
-        restDiv.textContent = rest;
-
-        if (!needsToggle) {
-            container.appendChild(restDiv);
-            return;
-        }
-
-        const detailsButton = document.createElement("button");
-        detailsButton.type = "button";
-        detailsButton.textContent = messenger.i18n.getMessage("seeDetails");
-        detailsButton.style.marginBottom = "5px";
-        container.appendChild(detailsButton);
-
-        restDiv.style.display = "none";
-        container.appendChild(restDiv);
-
-        detailsButton.addEventListener("click", () => {
-            const visible = restDiv.style.display !== "none";
-            restDiv.style.display = visible ? "none" : "block";
-            detailsButton.textContent = messenger.i18n.getMessage(visible ? "seeDetails" : "hideDetails");
-        });
+        return;
     }
+
+    // With a summary, the rest is shown on demand via the details button.
+    detailsEl.hidden = true;
+    buttonEl.textContent = messenger.i18n.getMessage("seeDetails");
+}
+
+function toggleDetails() {
+    const detailsEl = document.getElementById("analysisDetails");
+    const buttonEl = document.getElementById("detailsButton");
+    detailsEl.hidden = !detailsEl.hidden;
+    buttonEl.textContent = messenger.i18n.getMessage(detailsEl.hidden ? "seeDetails" : "hideDetails");
 }
 
 async function openConfigPage(event) {
@@ -97,6 +81,7 @@ async function openConfigPage(event) {
 async function onLoad() {
     localize();
     document.getElementById("config_link").addEventListener("click", openConfigPage);
+    document.getElementById("detailsButton").addEventListener("click", toggleDetails);
 
     await requestResult();
 
